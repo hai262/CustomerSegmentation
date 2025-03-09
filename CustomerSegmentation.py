@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
+import base64
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -13,49 +15,62 @@ import scipy.cluster.hierarchy as sch
 from tabulate import tabulate
 
 # Set up the title of the app with custom style, FontAwesome icon, and background image
-st.markdown("""
-    <style>
-        .title {
-            color: #ff052b;
-            font-size: 40px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .subtitle {
-            color: #05eeff;
-            font-size: 17px;
-            font-weight: bold;
-        }
-        .sidebar-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #1E90FF;
-        }
-        .metrics {
-            color: #28A745;
-            font-weight: bold;
-        }
-        /* Add Background Image for the first page */
-        .main {
-            background-image: url('https://www.bounteous.com/sites/default/files/insights/2022-10/previews/screen_shot_2022-09-01_at_12.34.57_pm.png');  /* Use your image URL here */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: 50px;
-        }
-    </style>
-    <div class="title">
-        <i class="fas fa-users"></i> Customer Segmentation Analysis
-    </div>
-""", unsafe_allow_html=True)
+# Path to the image in your project folder
+image_path = "background_image.png"  # Update this path to the location of your image
 
-# Add a description for the app with a custom color and icon
-st.markdown("""
-    <div class='subtitle'>
-        <i class="fas fa-info-circle"></i> Perform customer segmentation with various clustering techniques, such as K-Means, Hierarchical Clustering, DBSCAN, and Gaussian Mixture Models. Upload your dataset, select the algorithm, and explore the results.
-        The app will display interactive visualizations and performance metrics to help you better understand the segmentation.
-    </div>
-""", unsafe_allow_html=True)
+# Make sure the image exists in the project directory
+if os.path.exists(image_path):
+    # Convert image to base64 and add to the background
+    with open(image_path, "rb") as image_file:
+        image_base64 = base64.b64encode(image_file.read()).decode()
+
+    # Apply custom CSS for background image
+    st.markdown(f"""
+        <style>
+            .title {{
+                color: #ff052b;
+                font-size: 40px;
+                font-weight: bold;
+                text-align: center;
+            }}
+            .subtitle {{
+                color: #05eeff;
+                font-size: 17px;
+                font-weight: bold;
+            }}
+            .sidebar-title {{
+                font-size: 20px;
+                font-weight: bold;
+                color: #1E90FF;
+            }}
+            .metrics {{
+                color: #28A745;
+                font-weight: bold;
+            }}
+            /* Use base64 encoded image for the background */
+            .main {{
+                background-image: url('data:image/png;base64,{image_base64}');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                padding: 50px;
+            }}
+        </style>
+        <div class="title">
+            <i class="fas fa-users"></i> Customer Segmentation Analysis
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Add a description for the app with a custom color and icon
+    st.markdown("""
+        <div class='subtitle'>
+            <i class="fas fa-info-circle"></i> Perform customer segmentation with various clustering techniques, such as K-Means, Hierarchical Clustering, DBSCAN, and Gaussian Mixture Models. Upload your dataset, select the algorithm, and explore the results.
+            The app will display interactive visualizations and performance metrics to help you better understand the segmentation.
+        </div>
+    """, unsafe_allow_html=True)
+
+else:
+    st.error("Image not found. Please make sure the image path is correct.")
 
 # File Upload Section
 uploaded_file = st.file_uploader(":orange[Upload your CSV file]", type=["csv"])
