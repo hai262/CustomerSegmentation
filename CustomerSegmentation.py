@@ -13,40 +13,34 @@ import scipy.cluster.hierarchy as sch
 from tabulate import tabulate
 
 # Set up the title of the app with custom style, FontAwesome icon, and background image
-# Use the raw URL of the image hosted on GitHub
-image_url = 'https://raw.githubusercontent.com/hai262/CustomerSegmentation/master/background_image.png'
-
-# Set up the title of the app with custom style, FontAwesome icon, and background image
-st.markdown(f"""
+st.markdown("""
     <style>
-        .title {{
+        .title {
             color: #ff052b;
             font-size: 40px;
             font-weight: bold;
             text-align: center;
-        }}
-        .subtitle {{
+        }
+        .subtitle {
             color: #05eeff;
             font-size: 17px;
             font-weight: bold;
-        }}
-        .sidebar-title {{
+        }
+        .sidebar-title {
             font-size: 20px;
             font-weight: bold;
             color: #1E90FF;
-        }}
-        .metrics {{
+        }
+        .metrics {
             color: #28A745;
             font-weight: bold;
-        }}
-        /* Use background image from the public URL */
-        .main {{
-            background-image: url('{image_url}');
+        }
+        .main {
+            background-image: url('https://www.bounteous.com/sites/default/files/insights/2022-10/previews/screen_shot_2022-09-01_at_12.34.57_pm.png');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            padding: 50px;
-        }}
+
+        }
     </style>
     <div class="title">
         <i class="fas fa-users"></i> Customer Segmentation Analysis
