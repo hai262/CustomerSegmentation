@@ -39,7 +39,8 @@ st.markdown("""
             background-image: url('https://www.bounteous.com/sites/default/files/insights/2022-10/previews/screen_shot_2022-09-01_at_12.34.57_pm.png');
             background-size: cover;
             background-position: center;
-
+            background-repeat: no-repeat;
+            height: 100vh;
         }
     </style>
     <div class="title">
